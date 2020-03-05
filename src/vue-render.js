@@ -18,17 +18,26 @@ class VueRender {
 
     async loadComponents() {
         this.app.logger.info(`[html] load components`)
-        const ordersFile = await fs.readFile(path.join(this.app.settings.baseDir, 'components', 'orders.vue'), 'utf8')
-        this.component = (await import('./components/orders.js')).default(this.app)
-        Object.assign(this.component, compiler.compileToFunctions(ordersFile, {
+        const ordersFile = await fs.readFile(path.join(this.app.settings.baseDir, 'src', 'components', 'orders.vue'), 'utf8')
+        const component = (await import('./components/orders.js')).default(this.app)
+        Object.assign(component, compiler.compileToFunctions(ordersFile, {
             preserveWhitespace: false,
         }))
 
-        console.log(this.component)
+        return component
     }
 
 
     async renderComponent(name, state) {
+        if (!this.component) {
+            this.component = await this.loadComponents()
+        } else {
+            // Livereload always reloads template/component data.
+            if (this.app.settings.dev) {
+                this.component = await this.loadComponents()
+            }
+        }
+
         this.app.logger.info(`[html] render component ${name}`)
         this.vm = new Vue({
             data: {
@@ -36,7 +45,6 @@ class VueRender {
             },
             render: h => h(this.component),
         })
-
 
         const html = await renderToString(this.vm)
         return html

@@ -3,6 +3,6 @@ export default (app) => {
         computed: {
 
         },
-        store: ['orders'],
+        store: ['state'],
     }
 }

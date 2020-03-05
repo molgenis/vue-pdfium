@@ -1,21 +1,22 @@
-<div>
-    <style>
+<html>
+    <head>
+        <link rel="stylesheet" href="http://localhost:3000/static/styles.css">
 
-    table {
-        border: 1px solid #aa;
-        width: 100%;
-    }
+    </head>
+    <body>
+        <img src="http://localhost:3000/static/logo.png" width="234" height="45">
+        <h1>Order details</h1>
+        <table>
+        <div v-for="section in state">
+            <h2>{{section.name}}</h2>
 
-    td {
-        background: #f00;
-        border: 1px solid #eee;
-        padding: 8px;
-    }
-    </style>
-    <table>
-    <tr v-for="order in orders">
-        <td>{{order.id}}</td>
-        <td>{{order.name}}</td>
-    </tr>
-    </table>
-</div>
+            <table v-for="subsection in section.subsections">
+                <h3>{{subsection.name}}</h3>
+                <div v-for="variable in subsection.variables">
+                {{variable.label}}
+                </div>
+            </table>
+        </div>
+        </table>
+    </body>
+</html>

@@ -6,7 +6,10 @@ class PdfRender {
     async html2pdf(htmlString) {
         const page = await this.pool.acquire()
         await page.setContent(htmlString)
-        const buffer = await page.pdf({})
+        const buffer = await page.pdf({
+            format: 'A4',
+            printBackground: true,
+        })
         this.pool.release(page)
         return buffer
     }

@@ -1,18 +1,18 @@
 import {__dirname} from './utils.js'
 import bodyParser from 'body-parser'
+import chokidar from 'chokidar'
 import express from 'express'
+import fs from 'fs-extra'
 import logger from './logger.js'
+import mount from 'connect-mount'
+import path from 'path'
 import PdfRender from './pdf-render.js'
 import Pool from './pool.js'
 import rc from 'rc'
+import serveStatic from 'serve-static'
+import tinylr from 'tiny-lr'
 import validators from './schema.js'
 import VueRender from './vue-render.js'
-
-import tinylr from 'tiny-lr'
-
-tinylr().listen(35729, function() {
-    console.log('... tinylr listening');
-})
 
 const app = {logger}
 
@@ -20,8 +20,9 @@ function errorHandler(err, req, res, next) {
     res.status(400).json({ error: err })
 }
 
-app.settings = rc('pdf-generator', {
-    baseDir: __dirname,
+const settings = app.settings = rc('pdf-generator', {
+    baseDir: path.join(__dirname, '../'),
+    dev: true,
     headless: true,
     pool: {
         max: 10,
@@ -31,8 +32,10 @@ app.settings = rc('pdf-generator', {
     port: 3000,
 })
 
+
 app.express = express()
 app.express.use(bodyParser.json())
+app.express.use(mount('/static', serveStatic(path.join(settings.baseDir, 'static'))))
 
 app.express.post('/html2pdf', async function(req, res, next) {
     const validated = validators.html2pdf.validate(req.body)
@@ -62,27 +65,17 @@ app.express.post('/vue2pdf', async function(req, res, next) {
  * Use from a browser during development makes
  * it easier to iterate quickly.
  */
-app.express.get('/vue2pdf-dev', async function(req, res, next) {
-    const state = {
-        component: 'orders',
-        state: {
-            orders: [
-                {id: 1, name: 'order 1'},
-                {id: 2, name: 'order 2'},
-                {id: 3, name: 'order 3'},
-                {id: 4, name: 'order 4'},
-                {id: 5, name: 'order 5'},
-            ],
-        },
-    }
+if (app.settings.dev) {
+    app.express.get('/vue2pdf-dev', async function(req, res, next) {
+        const state = JSON.parse((await fs.readFile(path.join(app.settings.baseDir, 'state.json'), 'utf8')))
 
-    const html = await app.vue.renderComponent(state.component, state.state)
-    let buffer = await app.pdf.html2pdf(html)
+        const html = await app.vue.renderComponent('orders', {state})
+        let buffer = await app.pdf.html2pdf(html)
 
-    res.set('Content-Type', 'application/pdf')
-    res.send(buffer)
-})
-
+        res.set('Content-Type', 'application/pdf')
+        res.send(buffer)
+    })
+}
 
 app.express.use(errorHandler)
 
@@ -90,7 +83,20 @@ app.express.listen(app.settings.port, async() => {
     app.logger.info(`[service] started on port ${app.settings.port}`)
     app.pool = await Pool(app)
     app.vue = VueRender(app)
-    await app.vue.loadComponents()
     app.pdf = PdfRender(app)
 })
+
+
+if (app.settings.dev) {
+    tinylr().listen(35729, function() {
+        app.logger.debug('[service] liveload development service started')
+    })
+
+    chokidar.watch([
+        path.join(app.settings.baseDir, 'src', 'components', '*.vue'),
+        path.join(app.settings.baseDir, 'static', '*.css'),
+    ]).on('change', async() => {
+        tinylr.changed('app.js')
+    })
+}
 
