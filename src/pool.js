@@ -16,7 +16,7 @@ export default async function init(app) {
             destroy: function(page) {
                 app.logger.info(`[pool] release page`)
                 page.close()
-            }
+            },
         }
     }
 

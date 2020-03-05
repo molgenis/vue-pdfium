@@ -1,0 +1,13 @@
+{
+    "eslint.enable": true,
+    "eslint.validate": ["javascript"],
+    "eslint.options": {
+        "extensions": [".ts", ".js"]
+    },
+    "vetur.validation.template": false,
+    "eslint.autoFixOnSave": true,
+    "stylelint.autoFixOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    }
+}

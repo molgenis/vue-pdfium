@@ -1,0 +1,88 @@
+{
+    "parserOptions": {
+        "ecmaFeatures": {
+            "modules": true
+        },
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+    },
+    "env": {
+        "browser": true,
+        "node": true
+    },
+    "root": true,
+    "globals": {
+        "globalThis": true
+    },
+    "ignorePatterns": ["node_modules/"],
+    "overrides": [
+        {
+            "files": ["src/**/*.js"],
+            "parser": "espree",
+            "extends": [
+                "eslint:recommended"
+            ],
+            "rules": {
+                "comma-dangle": [2, "always-multiline"],
+                "indent": ["error", 4],
+                "no-cond-assign": ["error", "always"],
+                "one-var": "off",
+                "init-declarations": "off",
+                "no-console": "off",
+                "no-inline-comments": "off",
+                "sort-class-members/sort-class-members": [2, {
+                    "order": [
+                        "constructor",
+                        "[static-properties]",
+                        "[static-methods]",
+                        "[conventional-private-properties]",
+                        "[conventional-private-methods]",
+                        "[properties]",
+                        "[methods]",
+                        "[everything-else]"
+                    ],
+                    "groups": {
+                        "methods": [
+                            {
+                                "sort": "alphabetical",
+                                "type": "method"
+                            }
+                        ],
+                        "conventional-private-methods": [
+                            {
+                                "name": "/_.+/",
+                                "sort": "alphabetical",
+                                "type": "method"
+                            }
+                        ]
+                    },
+                    "accessorPairPositioning": "getThenSet",
+                    "stopAfterFirstProblem": true
+                }],
+                "sort-keys": [2, "asc", {"natural": true, "caseSensitive": false}],
+                "sort-vars": [2, {"ignoreCase": true}],
+                "space-before-function-paren": [2, "never"],
+                "space-in-brackets": [0, "never"],
+                "spaced-comment": [2, "always"],
+                "strict": [2, "global"],
+                "use-isnan": 2,
+                "valid-jsdoc": [2, {
+                    "prefer": {
+                        "return": "returns"
+                    },
+                     "requireReturn": false
+                }],
+                "vars-on-top": 0,
+                "sort-imports": ["error", {
+                    "ignoreCase": true,
+                    "ignoreDeclarationSort": false,
+                    "ignoreMemberSort": false,
+                    "memberSyntaxSortOrder": ["none",  "all", "single", "multiple"]
+                }]
+            },
+            "plugins": [
+                "sort-class-members"
+            ]
+        }
+    ]
+}
