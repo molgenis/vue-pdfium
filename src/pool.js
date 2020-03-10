@@ -23,6 +23,7 @@ export default async function init(app) {
     const browsers = []
     for (let i = 0; i < app.settings.pool.process; i++) {
         const browser = await puppeteer.launch({
+            args: ['--no-sandbox'],
             headless: app.settings.headless,
         })
         browsers.push(browser)

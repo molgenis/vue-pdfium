@@ -87,8 +87,12 @@ app.express.listen(app.settings.port, async() => {
 })
 
 app.onExit = async function() {
-    await app.pool.drain()
-    app.pool.clear()
+    try {
+        await app.pool.drain()
+        app.pool.clear()
+    } catch (err) {
+        console.log(err)
+    }
 }
 
 process.on('exit', app.onExit.bind(null,{cleanup:true}))
