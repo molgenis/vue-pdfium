@@ -1,0 +1,76 @@
+:root {
+    --dark: #343a40;
+    --primary: #276daa;
+    --secondary: #00acc7;
+    --spacer: 8px;
+}
+
+html {
+    color: var(--dark);
+    font-family: Sans-Serif;
+    font-size: 0.9rem;
+}
+
+h1, h2, h3 {
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    list-style: none;
+    margin: 1rem 0 2rem 0;
+    padding: 0;
+}
+
+ul li {
+    display: flex;
+}
+
+ul li div {
+    font-weight: bold;
+    width: 120px;
+}
+
+
+h1 {
+    margin: 1rem 0 0rem 0;
+    color: var(--secondary);
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+h2 {
+    color: var(--primary);
+    font-size: 1.2rem;
+    margin-top: 1.5rem;
+}
+
+h3 {
+    color: var(--dark);
+    font-size: 1rem;
+    margin: 0;
+    margin-top: 0.5rem;
+    padding: 0;
+}
+
+.variables {
+    display: flex;
+}
+
+.variables .assessments {
+    color: var(--primary);
+    font-weight: bold;
+    font-size: 1rem;
+    flex: 1;
+    margin-left: 1rem;
+}
+
+table {
+    width: 100%;
+}
+
+td {
+    border: 1px solid #eee;
+    padding: 8px;
+}
+

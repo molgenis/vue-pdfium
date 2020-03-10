@@ -9,5 +9,8 @@
     "stylelint.autoFixOnSave": true,
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": true
-    }
+    },
+    "files.associations": {
+        "*.vue": "vue-html"
+     }
 }

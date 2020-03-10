@@ -31,11 +31,9 @@ class VueRender {
     async renderComponent(name, state) {
         if (!this.component) {
             this.component = await this.loadComponents()
-        } else {
+        } else if (this.app.settings.dev) {
             // Livereload always reloads template/component data.
-            if (this.app.settings.dev) {
-                this.component = await this.loadComponents()
-            }
+            this.component = await this.loadComponents()
         }
 
         this.app.logger.info(`[html] render component ${name}`)

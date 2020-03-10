@@ -22,11 +22,12 @@ function errorHandler(err, req, res, next) {
 
 const settings = app.settings = rc('pdf-generator', {
     baseDir: path.join(__dirname, '../'),
-    dev: true,
+    dev: false,
     headless: true,
     pool: {
-        max: 10,
-        min: 3,
+        idleTimeoutMillis: 3000,
+        max: 3,
+        min: 1,
         process: 1,
     },
     port: 3000,
@@ -37,25 +38,18 @@ app.express = express()
 app.express.use(bodyParser.json())
 app.express.use(mount('/static', serveStatic(path.join(settings.baseDir, 'static'))))
 
-app.express.post('/html2pdf', async function(req, res, next) {
-    const validated = validators.html2pdf.validate(req.body)
-    if (validated.error) return next(validated.error)
-
-    const parsed = validated.value
-    let buffer = await app.pdf.html2pdf(parsed.html)
-
-    res.set('Content-Type', 'application/pdf')
-    res.send(buffer)
-})
-
 app.express.post('/vue2pdf', async function(req, res, next) {
     const validated = validators.vue2pdf.validate(req.body)
     if (validated.error) return next(validated.error)
 
     const parsed = validated.value
-
-    const html = await app.vue.renderComponent(parsed.component, parsed.state)
-    let buffer = await app.pdf.html2pdf(html)
+    let buffer, html
+    try {
+        html = await app.vue.renderComponent(parsed.component, parsed.state)
+        buffer = await app.pdf.html2pdf(html)
+    } catch (err) {
+        app.logger.error(err.stack)
+    }
 
     res.set('Content-Type', 'application/pdf')
     res.send(buffer)
@@ -69,7 +63,7 @@ if (app.settings.dev) {
     app.express.get('/vue2pdf-dev', async function(req, res, next) {
         const state = JSON.parse((await fs.readFile(path.join(app.settings.baseDir, 'state.json'), 'utf8')))
 
-        const html = await app.vue.renderComponent('orders', {state})
+        const html = await app.vue.renderComponent('orders', state)
         let buffer = await app.pdf.html2pdf(html)
 
         res.set('Content-Type', 'application/pdf')
@@ -86,6 +80,13 @@ app.express.listen(app.settings.port, async() => {
     app.pdf = PdfRender(app)
 })
 
+app.onExit = async function() {
+    await app.pool.drain()
+    app.pool.clear()
+}
+
+process.on('exit', app.onExit.bind(null,{cleanup:true}))
+process.on('SIGINT', app.onExit.bind(null, {exit:true}))
 
 if (app.settings.dev) {
     tinylr().listen(35729, function() {

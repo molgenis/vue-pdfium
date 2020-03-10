@@ -27,6 +27,6 @@ export default async function init(app) {
         })
         browsers.push(browser)
     }
-    app.logger.info(`[pool] start with ${browsers.length} browser processes`)
+    app.logger.info(`[pool] browser processes: ${browsers.length}`)
     return genericPool.createPool(factory(browsers), app.settings.pool)
 }

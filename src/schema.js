@@ -14,6 +14,6 @@ export default {
     }),
     vue2pdf: Joi.object({
         component: Joi.string().required(),
-        state: Joi.object(),
+        state: [Joi.object(), Joi.array()],
     }),
 }
