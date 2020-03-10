@@ -6,14 +6,18 @@ applications, by relying on application state and ServerSide Rendered
 Vue components.
 
 ## Install
+
+> Node.js 13+ is required (native ESM)
+
 ```bash
 git@github.com:molgenis/vue-pdfium.git
 cd vue-pdfium
 yarn
 cp vue-pdfiumrc.example vue-pdfiumrc
+node src/service.js
 ```
 
-Simply POST the component name to render and its state:
+POST the component name to render and its state to `/vuepdf`:
 
 ```javascript
 import axios from 'axios'
@@ -34,11 +38,18 @@ const res = await axios({
 fileDownload(res.data, 'mypdf.pdf', 'application/pdf')
 ```
 
-```html
-/vuepdf
-/vuepdf-dev
+## Development
+
+```bash
+# Set `dev` to true, which autoreloads components on every request.
+vim .vue-pdfiumrc
+# Fill state.json with the results of JSON.stringify(data).
+# This allows you to develop with static state and GET requests.
+cp state.json.example state.json
+nodemon src/service.js
 ```
 
-Send state, render a Vue component PDF rendering service
+During development, open `/vuepdf-dev` in a Chrom(e/ium) browser and use
+the [Livereload extension](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei)
+to watch the rendered PDF in the browser while you update your component & styling.
 
-## Install

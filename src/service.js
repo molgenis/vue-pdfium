@@ -16,12 +16,6 @@ import VueRender from './vue-render.js'
 
 const app = {logger}
 
-function errorHandler(err, req, res, next) {
-    res.status(400).json({ error: err })
-}
-
-
-
 const settings = app.settings = rc('vue-pdfium', {
     baseDir: path.join(__dirname, '../'),
     dev: false,
@@ -41,7 +35,7 @@ app.express = express()
 app.express.use(bodyParser.json())
 app.express.use(mount('/static', serveStatic(path.join(settings.baseDir, 'static'))))
 
-app.express.post('/vue2pdf', async function(req, res, next) {
+app.express.post('/vuepdf', async function(req, res, next) {
     const validated = validators.vue2pdf.validate(req.body)
     if (validated.error) return next(validated.error)
 
@@ -52,6 +46,7 @@ app.express.post('/vue2pdf', async function(req, res, next) {
         buffer = await app.pdf.html2pdf(html)
     } catch (err) {
         app.logger.error(err.stack)
+        return next(err)
     }
 
     res.set('Content-Type', 'application/pdf')
@@ -63,18 +58,26 @@ app.express.post('/vue2pdf', async function(req, res, next) {
  * it easier to iterate quickly.
  */
 if (app.settings.dev) {
-    app.express.get('/vue2pdf-dev', async function(req, res, next) {
-        const state = JSON.parse((await fs.readFile(path.join(app.settings.baseDir, 'state.json'), 'utf8')))
-
-        const html = await app.vue.renderComponent('orders', state)
-        let buffer = await app.pdf.html2pdf(html)
+    app.express.get('/vuepdf-dev', async function(req, res, next) {
+        let buffer, html
+        try {
+            const state = JSON.parse((await fs.readFile(path.join(app.settings.baseDir, 'state.json'), 'utf8')))
+            html = await app.vue.renderComponent('orders', state)
+            buffer = await app.pdf.html2pdf(html)
+        } catch (err) {
+            app.logger.error(err.stack)
+            return next(err)
+        }
 
         res.set('Content-Type', 'application/pdf')
         res.send(buffer)
     })
 }
 
-app.express.use(errorHandler)
+// Simple error handler.
+app.express.use((err, req, res, next) => {
+    res.status(400).json({ error: err })
+})
 
 app.express.listen(app.settings.port, async() => {
     app.logger.info(`[service] started on port ${app.settings.port}`)
