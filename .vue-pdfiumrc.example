@@ -1,0 +1,11 @@
+{
+    "dev": false,
+    "headless": true,
+    "pool": {
+        "idleTimeoutMillis": 3000,
+        "max": 3,
+        "min": 1,
+        "process": 1
+    },
+    "port": 3000
+}

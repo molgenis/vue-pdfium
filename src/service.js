@@ -20,7 +20,9 @@ function errorHandler(err, req, res, next) {
     res.status(400).json({ error: err })
 }
 
-const settings = app.settings = rc('pdf-generator', {
+
+
+const settings = app.settings = rc('vue-pdfium', {
     baseDir: path.join(__dirname, '../'),
     dev: false,
     headless: true,
@@ -33,6 +35,7 @@ const settings = app.settings = rc('pdf-generator', {
     port: 3000,
 })
 
+app.logger.info(`[service] dev mode: ${settings.dev}`)
 
 app.express = express()
 app.express.use(bodyParser.json())

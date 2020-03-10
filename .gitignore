@@ -1,3 +1,4 @@
+.vue-pdfiumrc
 node_modules
 logs
 state.json
