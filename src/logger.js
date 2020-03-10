@@ -7,7 +7,7 @@ const logFormat = winston.format.printf(info => {
 
 var rotateLogger = new (winston.transports.DailyRotateFile)({
     datePattern: 'YYYY-MM-DD-HH',
-    filename: 'logs/pdf-generator-%DATE%.log',
+    filename: 'logs/vue-pdfium-%DATE%.log',
     format: winston.format.combine(
         winston.format.timestamp(),
         logFormat,
