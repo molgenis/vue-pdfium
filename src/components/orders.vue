@@ -7,7 +7,7 @@
         <h1>Order details</h1>
         <ul>
             <li><div>Order number</div> {{order.orderNumber}}</li>
-            <li><div>Name</div> {{order.name}}</li>
+            <li v-if="order.name"><div>Name</div>{{order.name}}</li>
             <li><div>Email</div> {{order.email}}</li>
             <li><div>User</div> {{order.user}}</li>
         </ul>
