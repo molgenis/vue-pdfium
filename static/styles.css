@@ -57,6 +57,12 @@ h3 {
     display: flex;
 }
 
+.variables .variable {
+    width: 250px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
 .variables .assessments {
     color: var(--primary);
     font-weight: bold;

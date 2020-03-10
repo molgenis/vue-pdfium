@@ -21,7 +21,7 @@
             <div v-for="subsection in section.subsections">
                 <h3>{{subsection.name}}</h3>
                 <div class="variables" v-for="variable in subsection.variables">
-                    {{variable.label||variable.name}}
+                    <div class="variable">{{variable.label||variable.name}}</div>
                     <div class="assessments">{{ variableAssessments[variable.id] }}</div>
                 </div>
             </div>
