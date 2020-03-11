@@ -27,12 +27,14 @@ const settings = app.settings = rc('vue-pdfium', {
         process: 1,
     },
     port: 3000,
+    postLimit: '10mb',
 })
 
 app.logger.info(`[service] dev mode: ${settings.dev}`)
 
 app.express = express()
-app.express.use(bodyParser.json())
+app.express.use(bodyParser.json({limit: settings.postLimit}))
+
 app.express.use(mount('/static', serveStatic(path.join(settings.baseDir, 'static'))))
 
 app.express.post('/vuepdf', async function(req, res, next) {
