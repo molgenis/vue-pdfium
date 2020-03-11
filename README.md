@@ -1,9 +1,19 @@
 # vue-pdfium
 
-This is a fast HTML to PDF rendering service with a builtin Vue renderer.
-Its purpose is to provide a flexible PDF renderer for client-side Vue
-applications, by relying on application state and ServerSide Rendered
-Vue components.
+[Puppeteer](https://github.com/puppeteer/puppeteer) is a powerful way
+to control a headless Chromium instance using the DevTools protocol.
+Chromium uses [Pdfium](https://opensource.google/projects/pdfium) to render
+PDFs from HTML. Pdfium deals with the nitty-gritty details of converting
+HTML & CSS to a similar-looking PDF file. Puppeteer offers an [API method](https://github.com/puppeteer/puppeteer/blob/v2.1.1/docs/api.md#pagepdfoptions) to generate a
+PDF through this stack.
+
+Vue-pdfium combines Puppeteer and Vue in a Node application. A Vue browser
+application only has to send state to the `/vuepdf` endpoint. The endpoint
+renders a specified component on the server as HTML and responds with the
+generated PDF.
+
+Compared to manual navigation with Puppeteer(using .goto), this approach is
+faster and offers more control over the eventual layout of the rendered PDF.
 
 ## Install
 
