@@ -22,11 +22,13 @@
   "main": "src/service.js",
   "devDependencies": {
     "chokidar": "^3.3.1",
+    "eslint": "^6.8.0",
     "eslint-plugin-sort-class-members": "^1.6.0",
     "tiny-lr": "^1.1.1"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint src/**/*.js"
   },
   "repository": {
     "type": "git",

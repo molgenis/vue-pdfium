@@ -1,4 +1,4 @@
-export default (app) => {
+export default () => {
     return {
         computed: {
             variableAssessments() {
