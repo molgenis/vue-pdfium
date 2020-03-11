@@ -1,7 +1,7 @@
 pipeline {
     agent {
         kubernetes {
-            label 'node-stretch'
+            label 'node-erbium'
         }
     }
     environment {
@@ -26,18 +26,9 @@ pipeline {
 
                 container('node') {
                     script {
+                        sh "yarn"
                         sh "yarn lint"
                     }
-                }
-            }
-        }
-        stage('Build: [ pull request ]') {
-            when {
-                changeRequest()
-            }
-            steps {
-                container('sonar') {
-                    sh "sonar-scanner -Dsonar.github.oauth=${env.GITHUB_TOKEN} -Dsonar.pullrequest.base=${CHANGE_TARGET} -Dsonar.pullrequest.branch=${BRANCH_NAME} -Dsonar.pullrequest.key=${env.CHANGE_ID} -Dsonar.pullrequest.provider=GitHub -Dsonar.pullrequest.github.repository=molgenis/vue-pdfium"
                 }
             }
         }
@@ -75,6 +66,7 @@ pipeline {
             steps {
                 milestone 2
                 container('node') {
+                    sh "yarn"
                     sh "npx semantic-release"
                 }
             }
@@ -92,14 +84,6 @@ pipeline {
                     sh "#!/busybox/sh\necho '{\"auths\": {\"registry.molgenis.org\": {\"auth\": \"${NEXUS_AUTH}\"}}}' > ${DOCKER_CONFIG}/config.json"
                     sh "#!/busybox/sh\n/kaniko/executor --context ${WORKSPACE} --destination ${LOCAL_REPOSITORY}:${TAG}"
                 }
-            }
-        }
-        post {
-            success {
-                hubotSend(message: 'Build success', status:'INFO', site: 'slack-pr-app-team')
-            }
-            failure {
-                hubotSend(message: 'Build failed', status:'ERROR', site: 'slack-pr-app-team')
             }
         }
     }
