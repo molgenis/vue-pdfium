@@ -11,6 +11,6 @@ export default () => {
                 return variableAssesmentsStings
             },
         },
-        store: ['assessments', 'cartTree', 'gridSelection', 'order'],
+        store: ['assessments', 'cartTree', 'filters', 'gridSelection', 'order'],
     }
 }
