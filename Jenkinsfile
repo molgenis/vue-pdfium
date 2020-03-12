@@ -48,29 +48,6 @@ pipeline {
                 }
             }
         }
-        stage('Release: [ master ]') {
-            when {
-                allOf {
-                    branch 'master'
-                    not {
-                        changelog '.*\\[skip ci\\]$'
-                    }
-                }
-            }
-            environment {
-                GIT_AUTHOR_EMAIL = 'molgenis+ci@gmail.com'
-                GIT_AUTHOR_NAME = 'molgenis-jenkins'
-                GIT_COMMITTER_EMAIL = 'molgenis+ci@gmail.com'
-                GIT_COMMITTER_NAME = 'molgenis-jenkins'
-            }
-            steps {
-                milestone 2
-                container('node') {
-                    sh "yarn"
-                    sh "npx semantic-release"
-                }
-            }
-        }
         stage('Build container running the job [ master ]') {
             when {
                 branch 'master'
@@ -82,7 +59,7 @@ pipeline {
                 container (name: 'kaniko', shell: '/busybox/sh') {
                     sh "#!/busybox/sh\nmkdir -p ${DOCKER_CONFIG}"
                     sh "#!/busybox/sh\necho '{\"auths\": {\"registry.molgenis.org\": {\"auth\": \"${NEXUS_AUTH}\"}}}' > ${DOCKER_CONFIG}/config.json"
-                    sh "#!/busybox/sh\n/kaniko/executor --context ${WORKSPACE} --destination ${LOCAL_REPOSITORY}:${TAG}"
+                    sh "#!/busybox/sh\n/kaniko/executor --context ${WORKSPACE} --destination ${LOCAL_REPOSITORY}:master"
                 }
             }
         }
