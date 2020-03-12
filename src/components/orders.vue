@@ -5,8 +5,8 @@
     <body>
         <img class="logo" src="http://localhost:3000/static/logo.png" width="234" height="45">
 
-        <h1>Order details</h1>
         <div class="order">
+            <h1>Order details</h1>
             <div class="order-line">
                 <div class="name">Order number</div>
                 <div class="value">{{order.orderNumber}}</div>
@@ -28,16 +28,16 @@
             </div>
         </div>
 
-        <h1>Selection criteria</h1>
-        <div class="filters">
+        <div v-if="filters && Object.keys(filters).length" class="filters">
+            <h1>Selection criteria</h1>
             <div class="filter-line" v-for="filter, name in filters">
                 <div class="name">{{name}}</div>
                 <div class="value">{{filter.join(' ')}}</div>
             </div>
         </div>
 
-        <h1>Variables</h1>
         <div class="variables">
+            <h1>Variables</h1>
             <div class="section" v-for="section in cartTree">
                 <h2>{{section.name}}</h2>
                 <div class="subsection" v-for="subsection in section.subsections">
