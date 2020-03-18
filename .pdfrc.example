@@ -1,6 +1,7 @@
 {
-    "dev": false,
+    "dev": true,
     "headless": true,
+    "health": true,
     "pool": {
         "idleTimeoutMillis": 3000,
         "max": 3,
@@ -8,5 +9,5 @@
         "process": 1
     },
     "port": 3000,
-    "postLimit": "10mb"
+    "postLimit": "100mb"
 }

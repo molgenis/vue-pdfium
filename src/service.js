@@ -1,8 +1,10 @@
 import {__dirname} from './utils.js'
 import bodyParser from 'body-parser'
 import chokidar from 'chokidar'
+import delay from 'delay'
 import express from 'express'
 import fs from 'fs-extra'
+import lightship from 'lightship'
 import logger from './logger.js'
 import mount from 'connect-mount'
 import path from 'path'
@@ -16,7 +18,7 @@ import VueRender from './vue-render.js'
 
 const app = {logger}
 
-const settings = app.settings = rc('vue-pdfium', {
+const settings = app.settings = rc('pdf', {
     baseDir: path.join(__dirname, '../'),
     dev: false,
     headless: true,
@@ -77,16 +79,28 @@ if (app.settings.dev) {
 }
 
 // Simple error handler.
-app.express.use((err, req, res, next) => {
+app.express.use((err, req, res) => {
     res.status(400).json({ error: err })
 })
 
-app.express.listen(app.settings.port, async() => {
+const server = app.express.listen(app.settings.port, async() => {
     app.logger.info(`[service] started on port ${app.settings.port}`)
     app.pool = await Pool(app)
     app.vue = VueRender(app)
     app.pdf = PdfRender(app)
+
+    app.lightship.signalReady()
 })
+
+if (app.settings.health) {
+    app.lightship = lightship.createLightship({ detectKubernetes: false })
+    app.lightship.registerShutdownHandler(async() => {
+        app.logger.info('[service] shut down')
+        await delay(60 * 1000)
+        server.close()
+    })
+}
+
 
 app.onExit = async function() {
     try {
