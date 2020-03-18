@@ -1,6 +1,7 @@
 {
     "dev": false,
     "headless": true,
+    "health": true,
     "pool": {
         "idleTimeoutMillis": 3000,
         "max": 3,
