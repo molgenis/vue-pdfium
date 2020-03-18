@@ -18,7 +18,7 @@ import VueRender from './vue-render.js'
 
 const app = {logger}
 
-const settings = app.settings = rc('vue-pdfium', {
+const settings = app.settings = rc('pdf', {
     baseDir: path.join(__dirname, '../'),
     dev: false,
     headless: true,

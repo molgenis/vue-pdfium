@@ -11,7 +11,7 @@ RUN apt-get install -y gconf-service libasound2 libatk1.0-0 libc6 libcairo2\
 
 WORKDIR /opt/vue-pdfium
 COPY package.json .
-COPY .vue-pdfiumrc.example .vue-pdfiumrc
+COPY .pdfrc.example .pdfrc
 COPY ./src ./src
 COPY ./static ./static
 
