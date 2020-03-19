@@ -25,7 +25,7 @@ faster and offers more control over the eventual layout of the rendered PDF.
 git@github.com:molgenis/vue-pdfium.git
 cd vue-pdfium
 yarn
-cp vue-pdfiumrc.example vue-pdfiumrc
+cp .pdfrc.example .pdfrc
 node src/service.js
 ```
 
@@ -67,7 +67,7 @@ fileDownload(res.data, 'mypdf.pdf', 'application/pdf')
 
 ```bash
 # Set `dev` to true, which autoreloads components on every request.
-vim .vue-pdfiumrc
+vim .pdfrc
 # Fill state.json with the results of JSON.stringify(data).
 # This allows you to develop with static state and GET requests.
 cp state.json.example state.json

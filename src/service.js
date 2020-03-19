@@ -79,7 +79,7 @@ if (app.settings.dev) {
 }
 
 // Simple error handler.
-app.express.use((err, req, res) => {
+app.express.use((err, req, res, next) => {// eslint-disable-line no-unused-vars
     res.status(400).json({ error: err })
 })
 
