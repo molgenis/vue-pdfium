@@ -17,7 +17,7 @@
     "winston": "^3.2.1",
     "winston-daily-rotate-file": "^4.4.2"
   },
-  "name": "@molgenis/pdf-generator",
+  "name": "@molgenis/vue-pdfium",
   "description": "Vue PDF rendering service",
   "version": "1.0.0",
   "main": "src/service.js",
