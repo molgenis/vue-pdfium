@@ -1,1 +1,429 @@
-{"component":"orders","state":{"orders":[{"id":1,"name":"order 1"},{"id":2,"name":"order 2"},{"id":3,"name":"order 3"},{"id":4,"name":"order 4"},{"id":5,"name":"order 5"}]}}
+{
+    "assessments": {
+        "1": {
+            "_href": "/api/v2/lifelines_assessment/1",
+            "id": 1,
+            "name": "1A"
+        },
+        "2": {
+            "_href": "/api/v2/lifelines_assessment/2",
+            "id": 2,
+            "name": "1B"
+        },
+        "3": {
+            "_href": "/api/v2/lifelines_assessment/3",
+            "id": 3,
+            "name": "1C"
+        },
+        "4": {
+            "_href": "/api/v2/lifelines_assessment/4",
+            "id": 4,
+            "name": "2A"
+        },
+        "5": {
+            "_href": "/api/v2/lifelines_assessment/5",
+            "id": 5,
+            "name": "2B"
+        }
+    },
+    "cartTree": [
+        {
+            "_href": "/api/v2/lifelines_section/0",
+            "id": 0,
+            "name": "Section1",
+            "subsections": [
+                {
+                    "name": "Subsection1",
+                    "variables": [
+                        {
+                            "_href": "/api/v2/lifelines_variable/12345",
+                            "id": 12345,
+                            "name": "demo variable",
+                            "subsections": [
+                                36
+                            ],
+                            "subsection": 36
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "filters": {},
+    "gridSelection": {
+        "12345": [
+            5,
+            4,
+            1
+        ]
+    },
+    "order": {
+        "_meta": {
+            "href": "/api/v2/lifelines_order",
+            "hrefCollection": "/api/v2/lifelines_order",
+            "name": "lifelines_order",
+            "label": "order",
+            "attributes": [
+                {
+                    "href": "/api/v2/lifelines_order/meta/orderNumber",
+                    "fieldType": "STRING",
+                    "name": "orderNumber",
+                    "label": "orderNumber",
+                    "attributes": [],
+                    "maxLength": 255,
+                    "auto": false,
+                    "nillable": false,
+                    "readOnly": true,
+                    "labelAttribute": true,
+                    "unique": true,
+                    "visible": true,
+                    "lookupAttribute": true,
+                    "isAggregatable": false
+                },
+                {
+                    "href": "/api/v2/lifelines_order/meta/contents",
+                    "fieldType": "FILE",
+                    "name": "contents",
+                    "label": "contents",
+                    "attributes": [],
+                    "refEntity": {
+                        "href": "/api/v2/sys_FileMeta",
+                        "hrefCollection": "/api/v2/sys_FileMeta",
+                        "name": "sys_FileMeta",
+                        "label": "File metadata",
+                        "attributes": [
+                            {
+                                "href": "/api/v2/sys_FileMeta/meta/id",
+                                "fieldType": "STRING",
+                                "name": "id",
+                                "label": "Id",
+                                "attributes": [],
+                                "maxLength": 255,
+                                "auto": true,
+                                "nillable": false,
+                                "readOnly": true,
+                                "labelAttribute": false,
+                                "unique": true,
+                                "visible": false,
+                                "lookupAttribute": false,
+                                "isAggregatable": false
+                            },
+                            {
+                                "href": "/api/v2/sys_FileMeta/meta/filename",
+                                "fieldType": "STRING",
+                                "name": "filename",
+                                "label": "Filename",
+                                "attributes": [],
+                                "maxLength": 255,
+                                "auto": false,
+                                "nillable": false,
+                                "readOnly": false,
+                                "labelAttribute": true,
+                                "unique": false,
+                                "visible": true,
+                                "lookupAttribute": true,
+                                "isAggregatable": false
+                            },
+                            {
+                                "href": "/api/v2/sys_FileMeta/meta/url",
+                                "fieldType": "HYPERLINK",
+                                "name": "url",
+                                "label": "URL",
+                                "description": "File download URL",
+                                "attributes": [],
+                                "maxLength": 255,
+                                "auto": false,
+                                "nillable": false,
+                                "readOnly": false,
+                                "labelAttribute": false,
+                                "unique": true,
+                                "visible": true,
+                                "lookupAttribute": false,
+                                "isAggregatable": false
+                            }
+                        ],
+                        "labelAttribute": "filename",
+                        "idAttribute": "id",
+                        "lookupAttributes": [
+                            "filename",
+                            "contentType"
+                        ],
+                        "isAbstract": false,
+                        "writable": true,
+                        "languageCode": "en",
+                        "permissions": [
+                            "READ_METADATA",
+                            "UPDATE_DATA",
+                            "DELETE_DATA",
+                            "AGGREGATE_DATA",
+                            "ADD_DATA",
+                            "COUNT_DATA",
+                            "READ_DATA"
+                        ]
+                    },
+                    "auto": false,
+                    "nillable": false,
+                    "readOnly": false,
+                    "labelAttribute": false,
+                    "unique": false,
+                    "visible": true,
+                    "lookupAttribute": false,
+                    "isAggregatable": false
+                },
+                {
+                    "href": "/api/v2/lifelines_order/meta/submissionDate",
+                    "fieldType": "DATE_TIME",
+                    "name": "submissionDate",
+                    "label": "submissionDate",
+                    "attributes": [],
+                    "auto": false,
+                    "nillable": true,
+                    "readOnly": false,
+                    "labelAttribute": false,
+                    "unique": false,
+                    "visible": true,
+                    "lookupAttribute": false,
+                    "isAggregatable": false
+                },
+                {
+                    "href": "/api/v2/lifelines_order/meta/creationDate",
+                    "fieldType": "DATE_TIME",
+                    "name": "creationDate",
+                    "label": "creationDate",
+                    "attributes": [],
+                    "auto": true,
+                    "nillable": false,
+                    "readOnly": true,
+                    "labelAttribute": false,
+                    "unique": false,
+                    "visible": true,
+                    "lookupAttribute": false,
+                    "isAggregatable": false
+                },
+                {
+                    "href": "/api/v2/lifelines_order/meta/updateDate",
+                    "fieldType": "DATE_TIME",
+                    "name": "updateDate",
+                    "label": "updateDate",
+                    "attributes": [],
+                    "auto": false,
+                    "nillable": true,
+                    "readOnly": false,
+                    "labelAttribute": false,
+                    "unique": false,
+                    "visible": true,
+                    "lookupAttribute": false,
+                    "isAggregatable": false
+                },
+                {
+                    "href": "/api/v2/lifelines_order/meta/projectNumber",
+                    "fieldType": "STRING",
+                    "name": "projectNumber",
+                    "label": "project number",
+                    "attributes": [],
+                    "maxLength": 255,
+                    "auto": false,
+                    "nillable": true,
+                    "readOnly": false,
+                    "labelAttribute": false,
+                    "unique": false,
+                    "visible": true,
+                    "lookupAttribute": false,
+                    "isAggregatable": false
+                },
+                {
+                    "href": "/api/v2/lifelines_order/meta/name",
+                    "fieldType": "STRING",
+                    "name": "name",
+                    "label": "Name",
+                    "attributes": [],
+                    "maxLength": 255,
+                    "auto": false,
+                    "nillable": true,
+                    "readOnly": false,
+                    "labelAttribute": false,
+                    "unique": false,
+                    "visible": true,
+                    "lookupAttribute": false,
+                    "isAggregatable": false
+                },
+                {
+                    "href": "/api/v2/lifelines_order/meta/applicationForm",
+                    "fieldType": "FILE",
+                    "name": "applicationForm",
+                    "label": "Application Form",
+                    "description": "Word or text file to describe the request",
+                    "attributes": [],
+                    "refEntity": {
+                        "href": "/api/v2/sys_FileMeta",
+                        "hrefCollection": "/api/v2/sys_FileMeta",
+                        "name": "sys_FileMeta",
+                        "label": "File metadata",
+                        "attributes": [
+                            {
+                                "href": "/api/v2/sys_FileMeta/meta/id",
+                                "fieldType": "STRING",
+                                "name": "id",
+                                "label": "Id",
+                                "attributes": [],
+                                "maxLength": 255,
+                                "auto": true,
+                                "nillable": false,
+                                "readOnly": true,
+                                "labelAttribute": false,
+                                "unique": true,
+                                "visible": false,
+                                "lookupAttribute": false,
+                                "isAggregatable": false
+                            },
+                            {
+                                "href": "/api/v2/sys_FileMeta/meta/filename",
+                                "fieldType": "STRING",
+                                "name": "filename",
+                                "label": "Filename",
+                                "attributes": [],
+                                "maxLength": 255,
+                                "auto": false,
+                                "nillable": false,
+                                "readOnly": false,
+                                "labelAttribute": true,
+                                "unique": false,
+                                "visible": true,
+                                "lookupAttribute": true,
+                                "isAggregatable": false
+                            },
+                            {
+                                "href": "/api/v2/sys_FileMeta/meta/url",
+                                "fieldType": "HYPERLINK",
+                                "name": "url",
+                                "label": "URL",
+                                "description": "File download URL",
+                                "attributes": [],
+                                "maxLength": 255,
+                                "auto": false,
+                                "nillable": false,
+                                "readOnly": false,
+                                "labelAttribute": false,
+                                "unique": true,
+                                "visible": true,
+                                "lookupAttribute": false,
+                                "isAggregatable": false
+                            }
+                        ],
+                        "labelAttribute": "filename",
+                        "idAttribute": "id",
+                        "lookupAttributes": [
+                            "filename",
+                            "contentType"
+                        ],
+                        "isAbstract": false,
+                        "writable": true,
+                        "languageCode": "en",
+                        "permissions": [
+                            "READ_METADATA",
+                            "UPDATE_DATA",
+                            "DELETE_DATA",
+                            "AGGREGATE_DATA",
+                            "ADD_DATA",
+                            "COUNT_DATA",
+                            "READ_DATA"
+                        ]
+                    },
+                    "auto": false,
+                    "nillable": true,
+                    "readOnly": false,
+                    "labelAttribute": false,
+                    "unique": false,
+                    "visible": true,
+                    "lookupAttribute": false,
+                    "isAggregatable": false
+                },
+                {
+                    "href": "/api/v2/lifelines_order/meta/state",
+                    "fieldType": "ENUM",
+                    "name": "state",
+                    "label": "State",
+                    "attributes": [],
+                    "enumOptions": [
+                        "Draft",
+                        "Submitted",
+                        "Approved",
+                        "Rejected"
+                    ],
+                    "maxLength": 255,
+                    "auto": false,
+                    "nillable": false,
+                    "readOnly": false,
+                    "defaultValue": "Draft",
+                    "labelAttribute": false,
+                    "unique": false,
+                    "visible": true,
+                    "lookupAttribute": false,
+                    "isAggregatable": false
+                },
+                {
+                    "href": "/api/v2/lifelines_order/meta/email",
+                    "fieldType": "STRING",
+                    "name": "email",
+                    "label": "email",
+                    "attributes": [],
+                    "maxLength": 255,
+                    "auto": false,
+                    "nillable": true,
+                    "readOnly": false,
+                    "labelAttribute": false,
+                    "unique": false,
+                    "visible": true,
+                    "lookupAttribute": false,
+                    "isAggregatable": false
+                },
+                {
+                    "href": "/api/v2/lifelines_order/meta/user",
+                    "fieldType": "STRING",
+                    "name": "user",
+                    "label": "user",
+                    "attributes": [],
+                    "maxLength": 255,
+                    "auto": false,
+                    "nillable": true,
+                    "readOnly": false,
+                    "labelAttribute": false,
+                    "unique": false,
+                    "visible": true,
+                    "lookupAttribute": false,
+                    "isAggregatable": false
+                }
+            ],
+            "labelAttribute": "orderNumber",
+            "idAttribute": "orderNumber",
+            "lookupAttributes": [
+                "orderNumber"
+            ],
+            "isAbstract": false,
+            "writable": true,
+            "languageCode": "en",
+            "permissions": [
+                "READ_METADATA",
+                "UPDATE_DATA",
+                "DELETE_DATA",
+                "AGGREGATE_DATA",
+                "ADD_DATA",
+                "COUNT_DATA",
+                "READ_DATA"
+            ]
+        },
+        "_href": "/api/v2/lifelines_order/101",
+        "orderNumber": "101",
+        "contents": {
+            "_href": "/api/v2/sys_FileMeta/abc123defg",
+            "id": "abc123defg",
+            "filename": "cart.json",
+            "url": "http: //localhost:443/files/abc123defg"
+        },
+        "creationDate": "2020-03-23T14:28:35Z",
+        "updateDate": "2020-03-23T14:28:35Z",
+        "state": "Draft",
+        "email": "johndoe@molgenis.org",
+        "user": "johndoe"
+    }
+}
