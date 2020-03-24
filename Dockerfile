@@ -10,10 +10,12 @@ RUN apt-get install -y gconf-service libasound2 libatk1.0-0 libc6 libcairo2\
  libnss3 lsb-release xdg-utils wget
 
 WORKDIR /opt/vue-pdfium
-COPY package.json .
+COPY package*.json ./
+RUN npm i --only=production
+
 COPY .pdfrc.example .pdfrc
 COPY ./src ./src
 COPY ./static ./static
 
-RUN yarn
+EXPOSE 3001
 CMD [ "node", "src/service.js"]

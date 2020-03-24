@@ -32,7 +32,8 @@
             <h1>Selection criteria</h1>
             <div class="filter-line" v-for="filter, name in filters">
                 <div class="name">{{name}}</div>
-                <div class="value">{{filter.join(' ')}}</div>
+                <div class="value" v-if="Array.isArray(filter)">{{filter.join(' ')}}</div>
+                <div class="value" v-else>{{filter}}</div>
             </div>
         </div>
 

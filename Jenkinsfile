@@ -7,6 +7,7 @@ pipeline {
     environment {
         REPOSITORY = 'molgenis/vue-pdfium'
         LOCAL_REPOSITORY = "${LOCAL_REGISTRY}/molgenis/vue-pdfium"
+        npm_config_registry = "https://registry.npmjs.org"
     }
     stages {
         stage('Prepare') {
@@ -16,6 +17,7 @@ pipeline {
                 }
                 container('vault') {
                     script {
+                        env.DOCKERHUB_AUTH = sh(script: "vault read -field=value secret/gcc/token/dockerhub", returnStdout: true)
                         env.GITHUB_TOKEN = sh(script: 'vault read -field=value secret/ops/token/github', returnStdout: true)
                         env.NEXUS_AUTH = sh(script: 'vault read -field=base64 secret/ops/account/nexus', returnStdout: true)
                         env.SONAR_TOKEN = sh(script: 'vault read -field=value secret/ops/token/sonar', returnStdout: true)
@@ -27,13 +29,13 @@ pipeline {
 
                 container('node') {
                     script {
-                        sh "yarn"
-                        sh "yarn lint"
+                        sh "npm ci"
+                        sh "npm run lint"
                     }
                 }
             }
         }
-        stage('Build container running the job [ PR ]') {
+        stage('Build: [ pull request ]') {
             when {
                 changeRequest()
             }
@@ -49,21 +51,6 @@ pipeline {
                 }
             }
         }
-        stage('Build container running the job [ master ]') {
-            when {
-                branch 'master'
-            }
-            environment {
-                DOCKER_CONFIG="/root/.docker"
-            }
-            steps {
-                container (name: 'kaniko', shell: '/busybox/sh') {
-                    sh "#!/busybox/sh\nmkdir -p ${DOCKER_CONFIG}"
-                    sh "#!/busybox/sh\necho '{\"auths\": {\"registry.molgenis.org\": {\"auth\": \"${NEXUS_AUTH}\"}}}' > ${DOCKER_CONFIG}/config.json"
-                    sh "#!/busybox/sh\n/kaniko/executor --context ${WORKSPACE} --destination ${LOCAL_REPOSITORY}:master"
-                }
-            }
-        }
         stage('Release: [ master ]') {
             when {
                 allOf {
@@ -74,16 +61,34 @@ pipeline {
                 }
             }
             environment {
+                DOCKER_CONFIG="/root/.docker"
                 GIT_AUTHOR_EMAIL = 'molgenis+ci@gmail.com'
                 GIT_AUTHOR_NAME = 'molgenis-jenkins'
                 GIT_COMMITTER_EMAIL = 'molgenis+ci@gmail.com'
                 GIT_COMMITTER_NAME = 'molgenis-jenkins'
             }
             steps {
-                milestone 2
                 container('node') {
-                    sh "npm config set unsafe-perm true"
                     sh "npx semantic-release"
+
+                    script {
+                        env.TAG = sh(script: 'node -p "require(\'./package.json\').version"', returnStdout: true).trim()
+                    }
+                }
+
+                container (name: 'kaniko', shell: '/busybox/sh') {
+                    sh "#!/busybox/sh\nmkdir -p ${DOCKER_CONFIG}"
+                    sh "#!/busybox/sh\necho '{\"auths\": {\"https://index.docker.io/v1/\": {\"auth\": \"${DOCKERHUB_AUTH}\"}}}' > ${DOCKER_CONFIG}/config.json"
+                    sh "#!/busybox/sh\n/kaniko/executor --context ${WORKSPACE} --destination ${REPOSITORY}:${TAG}"
+                    sh "#!/busybox/sh\n/kaniko/executor --context ${WORKSPACE} --destination ${REPOSITORY}:latest"
+                }
+            }
+            post {
+                success {
+                    hubotSend(message: 'Build success', status:'INFO', site: 'slack-pr-app-team')
+                }
+                failure {
+                    hubotSend(message: 'Build failed', status:'ERROR', site: 'slack-pr-app-team')
                 }
             }
         }

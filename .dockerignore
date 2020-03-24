@@ -1,0 +1,6 @@
+Jenkinsfile
+node_modules
+state.json
+.pdfrc
+logs/**
+
