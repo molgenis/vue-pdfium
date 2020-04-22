@@ -21,7 +21,7 @@ git@github.com:molgenis/vue-pdfium.git
 cd vue-pdfium
 docker build . -t vue-pdfium
 docker container run -p 3000:3000 vue-pdfium
-# Or land in a shell with:
+# Or:
 docker run -it -p 3000:3000 vue-pdfium bash
 ```
 
