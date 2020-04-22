@@ -35,7 +35,7 @@ pipeline {
                 }
             }
         }
-        stage('Build: [ pull request ]') {
+        stage('Build: [pull request]') {
             when {
                 changeRequest()
             }
@@ -51,7 +51,7 @@ pipeline {
                 }
             }
         }
-        stage('Release: [ master ]') {
+        stage('Release: [master]') {
             when {
                 allOf {
                     branch 'master'
