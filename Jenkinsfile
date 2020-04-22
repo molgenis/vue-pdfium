@@ -12,9 +12,6 @@ pipeline {
     stages {
         stage('Prepare') {
             steps {
-                script {
-                    env.GIT_COMMIT = sh(script: 'git rev-parse HEAD', returnStdout: true).trim()
-                }
                 container('vault') {
                     script {
                         env.DOCKERHUB_AUTH = sh(script: "vault read -field=value secret/gcc/token/dockerhub", returnStdout: true)
