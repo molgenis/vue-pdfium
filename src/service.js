@@ -107,11 +107,13 @@ if (app.settings.health) {
 
 
 app.onExit = async function() {
-    try {
-        await app.pool.drain()
-        app.pool.clear()
-    } catch (err) {
-        console.log(err)
+    if (app.pool) {
+        try {
+            await app.pool.drain()
+            app.pool.clear()
+        } catch (err) {
+            console.log(err)
+        }
     }
 }
 
