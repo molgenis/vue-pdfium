@@ -1,3 +1,11 @@
+## [1.2.1](https://github.com/molgenis/pdf-generator/compare/v1.2.0...v1.2.1) (2020-04-22)
+
+
+### Bug Fixes
+
+* cleanup docs ([ba2163c](https://github.com/molgenis/pdf-generator/commit/ba2163c9935f8419476279134547f817ef32b095))
+* kaniko issues ([ee9d72e](https://github.com/molgenis/pdf-generator/commit/ee9d72e040c2640ebd16f55f3d7883c6554bb9dc))
+
 # [1.2.0](https://github.com/molgenis/pdf-generator/compare/v1.1.0...v1.2.0) (2020-04-22)
 
 
