@@ -70,12 +70,10 @@ pipeline {
             steps {
                 container('node') {
                     sh "npx semantic-release"
-
                     script {
                         env.TAG = sh(script: 'node -p "require(\'./package.json\').version"', returnStdout: true).trim()
                     }
                 }
-
                 container (name: 'kaniko', shell: '/busybox/sh') {
                     sh "#!/busybox/sh\nmkdir -p ${DOCKER_CONFIG}"
                     sh "#!/busybox/sh\necho '{\"auths\": {\"https://index.docker.io/v1/\": {\"auth\": \"${DOCKERHUB_AUTH}\"}}}' > ${DOCKER_CONFIG}/config.json"
