@@ -1,3 +1,15 @@
+# [1.1.0](https://github.com/molgenis/pdf-generator/compare/v1.0.0...v1.1.0) (2020-04-22)
+
+
+### Bug Fixes
+
+* jenkins build ([6026bae](https://github.com/molgenis/pdf-generator/commit/6026baeed85179076609d5bf7dc9e8ec52917511))
+
+
+### Features
+
+* update docker file ([6258ecf](https://github.com/molgenis/pdf-generator/commit/6258ecf8786531256d90c22e23f22f86a3693c6f))
+
 # 1.0.0 (2020-04-22)
 
 
