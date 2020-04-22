@@ -1,3 +1,11 @@
+## [1.2.2](https://github.com/molgenis/pdf-generator/compare/v1.2.1...v1.2.2) (2020-04-22)
+
+
+### Bug Fixes
+
+* jenkins config ([198b14a](https://github.com/molgenis/pdf-generator/commit/198b14a3aa8e3548b0f7e406101698632d82d827))
+* jenkins test ([8c69ad4](https://github.com/molgenis/pdf-generator/commit/8c69ad47fdc41b3cfd8435f8865b3fa92b8338ff))
+
 ## [1.2.1](https://github.com/molgenis/pdf-generator/compare/v1.2.0...v1.2.1) (2020-04-22)
 
 
