@@ -1,3 +1,15 @@
+# [1.2.0](https://github.com/molgenis/pdf-generator/compare/v1.1.0...v1.2.0) (2020-04-22)
+
+
+### Bug Fixes
+
+* version bump test ([f91fcf8](https://github.com/molgenis/pdf-generator/commit/f91fcf8e16430104e35438e8b2c5c353d36a449d))
+
+
+### Features
+
+* test version bump ([f7a3f9c](https://github.com/molgenis/pdf-generator/commit/f7a3f9c18d649668df4fd4d50f52cdebfb6a181c))
+
 # [1.1.0](https://github.com/molgenis/pdf-generator/compare/v1.0.0...v1.1.0) (2020-04-22)
 
 

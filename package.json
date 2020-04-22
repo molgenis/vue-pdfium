@@ -2,7 +2,7 @@
   "name": "@molgenis/vue-pdfium",
   "bin": "./src/service.js",
   "description": "Vue PDF rendering service",
-  "version": "2.1.0",
+  "version": "1.2.0",
   "main": "src/service.js",
   "dependencies": {
     "@hapi/joi": "^17.1.0",
