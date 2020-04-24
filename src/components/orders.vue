@@ -1,10 +1,9 @@
 <html>
     <head>
-        <link rel="stylesheet" href="http://localhost:3000/static/styles.css">
+        <link rel="stylesheet" :href="`http://localhost:${pdfium.port}/static/styles.css`">
     </head>
     <body>
-        <img class="logo" src="http://localhost:3000/static/logo.png" width="234" height="45">
-
+        <img class="logo" :src="`http://localhost:${pdfium.port}/static/logo.png`" width="234" height="45">
         <div class="order">
             <h1>Order details</h1>
             <div class="order-line">
