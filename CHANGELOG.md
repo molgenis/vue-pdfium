@@ -1,3 +1,15 @@
+# [1.3.0](https://github.com/molgenis/pdf-generator/compare/v1.2.2...v1.3.0) (2020-04-24)
+
+
+### Bug Fixes
+
+* jenkins version bump ([cc4f47d](https://github.com/molgenis/pdf-generator/commit/cc4f47dcf76004bdc4601b8c2f80cbf0f4f32d39))
+
+
+### Features
+
+* make pdfium settings available to rendering context ([dcf4101](https://github.com/molgenis/pdf-generator/commit/dcf41016589156974123a46c3237b2bb914e609a))
+
 ## [1.2.2](https://github.com/molgenis/pdf-generator/compare/v1.2.1...v1.2.2) (2020-04-22)
 
 
