@@ -11,6 +11,6 @@ export default () => {
                 return variableAssesmentsStings
             },
         },
-        store: ['assessments', 'cartTree', 'filters', 'gridSelection', 'order'],
+        store: ['assessments', 'cartTree', 'filters', 'gridSelection', 'order', 'pdfium'],
     }
 }

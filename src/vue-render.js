@@ -28,7 +28,14 @@ class VueRender {
     }
 
 
-    async renderComponent(name, state) {
+    async renderComponent(name, store) {
+        // Make (part of) the settings available to the rendering context.
+        Object.assign(store, {
+            pdfium: {
+                port: this.app.settings.port
+            }
+        })
+
         if (!this.component) {
             this.component = await this.loadComponents()
         } else if (this.app.settings.dev) {
@@ -37,12 +44,7 @@ class VueRender {
         }
 
         this.app.logger.info(`[html] render component ${name}`)
-        this.vm = new Vue({
-            data: {
-                store: state
-            },
-            render: h => h(this.component),
-        })
+        this.vm = new Vue({data: {store}, render: h => h(this.component)})
 
         const html = await renderToString(this.vm)
         return html

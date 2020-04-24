@@ -8,6 +8,6 @@
         "min": 1,
         "process": 1
     },
-    "port": 3001,
+    "port": 3000,
     "postLimit": "100mb"
 }
