@@ -1,15 +1,21 @@
 export default () => {
-    return {
-        computed: {
-            variableAssessments() {
-                let variableAssesmentsStings = {}
-                for (const [variableId, assessmentIds] of Object.entries(this.gridSelection)) {
-                    const assessmentNames = assessmentIds.map(assessmentId => this.assessments[assessmentId].name)
-                    variableAssesmentsStings[variableId] = assessmentNames.sort().join(' ')
-                }
 
-                return variableAssesmentsStings
-            },
+    return {
+        created: function() {
+            const variableAssessments = {}
+            const gridSelection = Object.entries(this.gridSelection)
+
+            for (const [variableId, assessmentIds] of gridSelection) {
+                const assessmentNames = assessmentIds.map(assessmentId => this.assessments[assessmentId].name)
+                variableAssessments[variableId] = assessmentNames.sort().join(' ')
+            }
+
+            this.variableAssessments = variableAssessments
+        },
+        data: function() {
+            return {
+                variableAssessments: {},
+            }
         },
         store: ['assessments', 'cartTree', 'filters', 'gridSelection', 'order', 'pdfium'],
     }
