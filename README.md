@@ -4,7 +4,7 @@
 
 ### Manual
 
-> Node.js 13 or later is required due to native ES modules.
+> Node.js 13 or later is required (native ESM).
 
 ```bash
 git@github.com:molgenis/vue-pdfium.git
