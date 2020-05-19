@@ -1,3 +1,10 @@
+## [1.3.3](https://github.com/molgenis/pdf-generator/compare/v1.3.2...v1.3.3) (2020-05-19)
+
+
+### Bug Fixes
+
+* calculate variableAssessments only once ([60d9266](https://github.com/molgenis/pdf-generator/commit/60d9266df658f29a14dba0789dbf26558afc3668))
+
 ## [1.3.2](https://github.com/molgenis/pdf-generator/compare/v1.3.1...v1.3.2) (2020-05-13)
 
 
