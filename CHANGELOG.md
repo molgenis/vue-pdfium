@@ -1,3 +1,10 @@
+## [1.3.4](https://github.com/molgenis/pdf-generator/compare/v1.3.3...v1.3.4) (2020-05-19)
+
+
+### Bug Fixes
+
+* logging format for kibana ([2eb2667](https://github.com/molgenis/pdf-generator/commit/2eb26676dc16074a474f40af5904fa83ad94eaad))
+
 ## [1.3.3](https://github.com/molgenis/pdf-generator/compare/v1.3.2...v1.3.3) (2020-05-19)
 
 
