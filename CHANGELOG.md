@@ -1,3 +1,10 @@
+## [1.3.5](https://github.com/molgenis/pdf-generator/compare/v1.3.4...v1.3.5) (2020-05-19)
+
+
+### Bug Fixes
+
+* use assessment names in criteria ([8cabb16](https://github.com/molgenis/pdf-generator/commit/8cabb16afdc4e42322389e5e1a023e2e4cd7c622))
+
 ## [1.3.4](https://github.com/molgenis/pdf-generator/compare/v1.3.3...v1.3.4) (2020-05-19)
 
 
