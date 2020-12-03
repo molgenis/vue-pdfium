@@ -1,3 +1,11 @@
+# [1.4.0](https://github.com/molgenis/pdf-generator/compare/v1.3.5...v1.4.0) (2020-12-03)
+
+
+### Features
+
+* Add extra order info ([1fdde2f](https://github.com/molgenis/pdf-generator/commit/1fdde2f542d37d65a227500b91f60a95c7fc97a0))
+* Add extra order info ([31a7f62](https://github.com/molgenis/pdf-generator/commit/31a7f62aa4515851f25dd17cfa481b28306fd7f2))
+
 ## [1.3.5](https://github.com/molgenis/pdf-generator/compare/v1.3.4...v1.3.5) (2020-05-19)
 
 
